@@ -42,6 +42,7 @@ const database = process.env.DATABASE
 
 //Database connecting stuff
 const connection = mysql.createPool({
+    connectionLimit : 100, //not sure if this does anything. Can't find a definitive answer on what the default value is, but it was working fast enough for me.
     host: dbHost,
     user: dbUser,
     password: dbPassword,
@@ -85,7 +86,7 @@ main()
       });
 })
 .catch(error => {
-    console.log("error")
+    console.log("error: " + error)
     connection.end(function(err) {
         if (err) {
           return console.log('error:' + err.message);
